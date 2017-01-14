@@ -1,0 +1,12 @@
+function [new,changed] = ChangeSilDir(polyBoundaryVecCell,data)
+changed = 1;
+ls = data.ls;
+vx = data.vx;
+W = eye(3)-2*vx*ls'/(vx'*ls);
+new{1} = polyBoundaryVecCell{1};
+new{2} = W*[polyBoundaryVecCell{3};ones(1,size(polyBoundaryVecCell{3},2))];
+new{2} = [new{2}(1,:)./new{2}(3,:);new{2}(2,:)./new{2}(3,:)];
+new{3} = W*[polyBoundaryVecCell{2};ones(1,size(polyBoundaryVecCell{2},2))];
+new{3} = [new{3}(1,:)./new{3}(3,:);new{3}(2,:)./new{3}(3,:)];
+new{4} = polyBoundaryVecCell{4};
+new{5} = polyBoundaryVecCell{5};
